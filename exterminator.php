@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: Exterminator
- * Version: 1.0.0
+ * Version: 1.0.3
  * Author: JetWeb
  *
  */
