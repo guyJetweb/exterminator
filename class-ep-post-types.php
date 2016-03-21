@@ -42,7 +42,7 @@ class EP_Post_Types {
             'label' => __('featured cpt', 'text_domain'),
             'description' => __('Post Type Description', 'text_domain'),
             'labels' => $labels,
-            'supports' => array('title', 'editor', 'thumbnail','genesis-seo','genesis-layouts'),
+            'supports' => array('title', 'editor', 'thumbnail','genesis-seo','genesis-layouts','genesis-cpt-archives-settings'),
             'hierarchical' => true,
             'public' => true,
             'show_ui' => true,
