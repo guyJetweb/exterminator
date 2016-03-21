@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: Exterminator
- * Version: 1.0.2
+ * Version: 1.0.0
  * Author: JetWeb
  *
  */
@@ -14,6 +14,8 @@ include_once( dirname(__FILE__) . '/organization-details-setting.php' );
 include_once(dirname(__FILE__) . '/versions.php' );
 include_once(dirname(__FILE__) . '/colors.php' );
 include_once(dirname(__FILE__) . '/wizard/wizard.php' );
+include_once(dirname(__FILE__) . '/updater.php' );
+include_once(dirname(__FILE__) . '/add_post_id_column.php' );
 include_once( dirname(__FILE__) . '/widgets/featured-service-widget.php' );
 include_once(dirname(__FILE__) . '/widgets/featured-cpt-widget.php' );
 

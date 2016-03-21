@@ -99,7 +99,7 @@ class Jetweb_Featured_CPT extends WP_Widget {
                     'size' => $instance['image_size'],
                     'context' => 'featured-page-widget',
                     'attr' => genesis_parse_attr('entry-image-widget'),
-                        ));
+                ));
 
                 if ($instance['show_image'] && $image)
                     printf('<a href="%s" title="%s" class="%s">%s</a>', get_permalink(), the_title_attribute('echo=0'), esc_attr($instance['image_alignment']), $image);
@@ -188,8 +188,8 @@ class Jetweb_Featured_CPT extends WP_Widget {
 
         <p>
             <label for="<?php echo $this->get_field_id('page_id'); ?>"><?php _e('Page', 'genesis'); ?>:</label>
-        <?php
-          $arg = array(
+            <?php
+            $arg = array(
                 'show_option_none' => 'None',
                 'hide_empty' => false,
                 'name' => $this->get_field_name('page_id'),
@@ -198,8 +198,8 @@ class Jetweb_Featured_CPT extends WP_Widget {
                 'suppress_filters' => true,
             );
 
-        wp_dropdown_pages($arg);
-        ?>
+            wp_dropdown_pages($arg);
+            ?>
         </p>
 
         <hr class="div" />
@@ -213,11 +213,11 @@ class Jetweb_Featured_CPT extends WP_Widget {
             <label for="<?php echo $this->get_field_id('image_size'); ?>"><?php _e('Image Size', 'genesis'); ?>:</label>
             <select id="<?php echo $this->get_field_id('image_size'); ?>" class="genesis-image-size-selector" name="<?php echo $this->get_field_name('image_size'); ?>">
                 <option value="thumbnail">thumbnail (<?php echo absint(get_option('thumbnail_size_w')); ?>x<?php echo absint(get_option('thumbnail_size_h')); ?>)</option>
-        <?php
-        $sizes = genesis_get_additional_image_sizes();
-        foreach ((array) $sizes as $name => $size)
-            echo '<option value="' . esc_attr($name) . '" ' . selected($name, $instance['image_size'], FALSE) . '>' . esc_html($name) . ' (' . absint($size['width']) . 'x' . absint($size['height']) . ')</option>';
-        ?>
+                <?php
+                $sizes = genesis_get_additional_image_sizes();
+                foreach ((array) $sizes as $name => $size)
+                    echo '<option value="' . esc_attr($name) . '" ' . selected($name, $instance['image_size'], FALSE) . '>' . esc_html($name) . ' (' . absint($size['width']) . 'x' . absint($size['height']) . ')</option>';
+                ?>
             </select>
         </p>
 
@@ -256,4 +256,3 @@ class Jetweb_Featured_CPT extends WP_Widget {
     }
 
 }
-

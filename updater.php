@@ -66,7 +66,7 @@ class WP_GitHub_Updater {
 	 * @return void
 	 */
 	public function __construct( $config = array() ) {
-
+            
 		$defaults = array(
 			'slug' => plugin_basename( __FILE__ ),
 			'proper_folder_name' => dirname( plugin_basename( __FILE__ ) ),
@@ -100,7 +100,7 @@ class WP_GitHub_Updater {
 	}
 
 	public function has_minimum_config() {
-
+          
 		$this->missing_config = array();
 
 		$required_config_params = array(
@@ -128,6 +128,7 @@ class WP_GitHub_Updater {
 	 * @return bool overrule or not
 	 */
 	public function overrule_transients() {
+                      
 		return ( defined( 'WP_GITHUB_FORCE_UPDATE' ) && WP_GITHUB_FORCE_UPDATE );
 	}
 
@@ -139,6 +140,7 @@ class WP_GitHub_Updater {
 	 * @return void
 	 */
 	public function set_defaults() {
+                      
 		if ( !empty( $this->config['access_token'] ) ) {
 
 			// See Downloading a zipball (private repo) https://help.github.com/articles/downloading-files-from-the-command-line
@@ -186,6 +188,7 @@ class WP_GitHub_Updater {
 	 * @return int timeout value
 	 */
 	public function http_request_timeout() {
+                      
 		return 2;
 	}
 
@@ -198,6 +201,7 @@ class WP_GitHub_Updater {
 	 * @return mixed
 	 */
 	public function http_request_sslverify( $args, $url ) {
+                      
 		if ( $this->config[ 'zip_url' ] == $url )
 			$args[ 'sslverify' ] = $this->config[ 'sslverify' ];
 
@@ -212,11 +216,12 @@ class WP_GitHub_Updater {
 	 * @return int $version the version number
 	 */
 	public function get_new_version() {
+                      
 		$version = get_site_transient( md5($this->config['slug']).'_new_version' );
 
 		if ( $this->overrule_transients() || ( !isset( $version ) || !$version || '' == $version ) ) {
-
 			$raw_response = $this->remote_get( trailingslashit( $this->config['raw_url'] ) . basename( $this->config['slug'] ) );
+
 
 			if ( is_wp_error( $raw_response ) )
 				$version = false;
@@ -266,13 +271,14 @@ class WP_GitHub_Updater {
 	 * @return mixed
 	 */
 	public function remote_get( $query ) {
+                      
 		if ( ! empty( $this->config['access_token'] ) )
 			$query = add_query_arg( array( 'access_token' => $this->config['access_token'] ), $query );
 
 		$raw_response = wp_remote_get( $query, array(
 			'sslverify' => $this->config['sslverify']
 		) );
-
+                error_log(print_r($raw_response,true));
 		return $raw_response;
 	}
 
@@ -284,6 +290,7 @@ class WP_GitHub_Updater {
 	 * @return array $github_data the data
 	 */
 	public function get_github_data() {
+                      
 		if ( isset( $this->github_data ) && ! empty( $this->github_data ) ) {
 			$github_data = $this->github_data;
 		} else {
@@ -304,7 +311,7 @@ class WP_GitHub_Updater {
 			// Store the data in this class instance for future calls
 			$this->github_data = $github_data;
 		}
-
+error_log(print_r($github_data,true));
 		return $github_data;
 	}
 
@@ -316,6 +323,7 @@ class WP_GitHub_Updater {
 	 * @return string $date the date
 	 */
 	public function get_date() {
+                      
 		$_date = $this->get_github_data();
 		return ( !empty( $_date->updated_at ) ) ? date( 'Y-m-d', strtotime( $_date->updated_at ) ) : false;
 	}
@@ -328,6 +336,7 @@ class WP_GitHub_Updater {
 	 * @return string $description the description
 	 */
 	public function get_description() {
+                      
 		$_description = $this->get_github_data();
 		return ( !empty( $_description->description ) ) ? $_description->description : false;
 	}
@@ -354,7 +363,7 @@ class WP_GitHub_Updater {
 	 * @return object $transient updated plugin data transient
 	 */
 	public function api_check( $transient ) {
-
+          
 		// Check if the transient contains the 'checked' information
 		// If not, just return its value without hacking it
 		if ( empty( $transient->checked ) )
@@ -389,7 +398,7 @@ class WP_GitHub_Updater {
 	 * @return object $response the plugin info
 	 */
 	public function get_plugin_info( $false, $action, $response ) {
-
+          
 		// Check if this call API is for the right plugin
 		if ( !isset( $response->slug ) || $response->slug != $this->config['slug'] )
 			return false;
@@ -422,6 +431,7 @@ class WP_GitHub_Updater {
 	 */
 	public function upgrader_post_install( $true, $hook_extra, $result ) {
 
+                      
 		global $wp_filesystem;
 
 		// Move & Activate

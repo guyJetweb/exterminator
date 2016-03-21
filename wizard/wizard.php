@@ -50,7 +50,6 @@ if (!class_exists('wizard')) :
         }
 
         public function includes() {
-            include_once('updater.php');
             include_once( 'the_wizard.php' );
           
         }
