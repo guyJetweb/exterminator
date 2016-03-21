@@ -189,13 +189,14 @@ class Jetweb_Featured_CPT extends WP_Widget {
         <p>
             <label for="<?php echo $this->get_field_id('page_id'); ?>"><?php _e('Page', 'genesis'); ?>:</label>
         <?php
-        $arg = array(
-            'show_option_none' => __('None'),
-            'orderby' => 'title',
-            'hide_empty' => false,
-            'post_type' => 'featured_cpt',
-            'suppress_filters' => true
-        );
+          $arg = array(
+                'show_option_none' => 'None',
+                'hide_empty' => false,
+                'name' => $this->get_field_name('page_id'),
+                'selected' => $instance['page_id'],
+                'post_type' => 'featured_cpt',
+                'suppress_filters' => true,
+            );
 
         wp_dropdown_pages($arg);
         ?>
